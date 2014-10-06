@@ -1,7 +1,15 @@
 <html>
-<link rel="stylesheet" href="css/style.css"/>
-<script src="js/jquery-2.1.1.min.js" type="application/javascript"></script>
-<script src="js/game.js" type="application/javascript"></script>
+<head>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript"></script>
+    <script src="js/game.js" type="application/javascript"></script>
+
+    <title>rf3studios Sight Word Match Game</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Sight Words Match Game For Kindergarten">
+    <meta name="author" content="Rich Friedel">
+</head>
 <body>
 <div id="container">
 <div class="header">Match The Sight Words</div>
