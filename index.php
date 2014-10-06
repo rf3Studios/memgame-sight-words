@@ -30,6 +30,7 @@ const GRID_ROWS = 4;
 // The number of columns in our grid
 const GRID_COLS = 4;
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css"/>
