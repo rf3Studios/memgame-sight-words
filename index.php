@@ -33,7 +33,7 @@ const GRID_COLS = 4;
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/jquery-2.1.1.min.js" type="application/javascript"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="application/javascript"></script>
     <script src="js/game.js" type="application/javascript"></script>
 
     <title>rf3studios Sight Word Match Game</title>
