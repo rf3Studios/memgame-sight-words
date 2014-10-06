@@ -1,3 +1,9 @@
+<?php
+// The number of rows in our grid
+const GRID_ROWS = 4;
+// The number of columns in our grid
+const GRID_COLS = 4;
+?>
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css"/>
@@ -13,207 +19,39 @@
 <body>
 <div id="container">
 <div class="header">Match The Sight Words</div>
-<div class="row-wrapper">
-    <div id="card-1" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #1 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-2" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #2 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-3" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #3 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-4" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #4 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row-wrapper">
-    <div id="card-5" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #5 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
+<?php
+// The number of total cards we'll need for the grid
+$numberOfCards = GRID_ROWS * GRID_COLS;
 
-    <div id="card-6" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #6 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-7" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #7 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-8" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #8 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row-wrapper">
-    <div id="card-9" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #9 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-10" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #10 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-11" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #11 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-12" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #12 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row-wrapper">
-    <div id="card-13" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #13 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-14" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #14 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-15" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #15 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-    <div id="card-16" class="flip-container" ontouchstart="this.classList.toggle('hover');">
-        <div class="flipper">
-            <div class="front">
-                <!-- front content -->
-                Card #16 Front
-            </div>
-            <div class="back">
-                <!-- back content -->
-                <span class="card-text"></span>
-            </div>
-        </div>
-    </div>
-</div>
+// Temp card count
+$tempCardNum = 1;
+
+// Generate rows
+for ($i = 0; $i < (GRID_ROWS); $i++) {
+    echo "<div class=\"row-wrapper\">\r\n";
+
+    // Generate cards
+    for ($j = 0; $j < GRID_COLS; $j++) {
+        echo "    <div id=\"card-" . $tempCardNum . "\" class=\"flip-container\" ontouchstart=\"this.classList.toggle('hover');\">\r\n";
+        echo "        <div class=\"flipper\">\r\n";
+        echo "            <div class=\"front\">\r\n";
+        echo "                <!-- front content -->\r\n";
+        echo "                Card #" . $tempCardNum . " Front\r\n";
+        echo "            </div>\r\n";
+        echo "            <div class=\"back\">\r\n";
+        echo "                <!-- back content -->\r\n";
+        echo "                <span class=\"card-text\"></span>\r\n";
+        echo "            </div>\r\n";
+        echo "        </div>\r\n";
+        echo "    </div>\r\n";
+
+        // Increment card count
+        $tempCardNum++;
+    }
+
+    echo "</div>\r\n";
+}
+?>
 </div>
 <script>
     $(document).ready(function () {
