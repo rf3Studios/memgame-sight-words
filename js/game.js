@@ -123,14 +123,16 @@ function detectCardClick() {
                 return;
             }
 
-            // Lock the card
+            // Lock the card so that the card cannot be flipped back
+            // over once it has been selected.
             lockCard(flippedCard.cardOneId);
 
-            // Set the processing lock while audio is playing
+            // Set the processing lock while audio is playing so that none of the cards
+            // can be flipped
             addProcessingLock();
 
             // Turn the card over
-            flipCard(this);
+            flipCard("#" + flippedCard.cardOneId);
 
             $(playSound(flippedCard.cardOneVal)).on("ended", function () {
                 removeProcessingLock();
@@ -157,7 +159,7 @@ function detectCardClick() {
             addProcessingLock();
 
             // Turn the second card
-            flipCard(this);
+            flipCard("#" + flippedCard.cardTwoId);
 
             // Play the card value audio
             $(playSound(flippedCard.cardTwoVal)).on('ended', function () {
@@ -293,11 +295,11 @@ function playSound(audioName) {
 /**
  * Turns the card
  *
- * @param ele {string} Element that needs to be flipped
+ * @param cardId {string} The card ID that needs to be flipped
  */
-function flipCard(ele) {
+function flipCard(cardId) {
     // Flip the card and set it to flipped
-    $(ele).toggleClass("flipped");
+    $(cardId).toggleClass("flipped");
 }
 
 /**
@@ -320,11 +322,7 @@ function removeProcessingLock() {
  * @returns {boolean} Returns TRUE if there is a processing lock active on the cards
  */
 function isProcessingLock() {
-    if ($(".flip-container").hasClass("processing")) {
-        return true;
-    }
-
-    return false;
+    return $(".flip-container").hasClass("processing");
 }
 
 /**
@@ -352,9 +350,5 @@ function unlockCard(cardId) {
  * @returns {boolean} Returns TRUE if the card is actively locked
  */
 function isCardLocked(cardId) {
-    if ($("#" + cardId).hasClass("locked")) {
-        return true;
-    }
-
-    return false;
+    return $("#" + cardId).hasClass("locked");
 }
