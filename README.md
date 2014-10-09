@@ -5,6 +5,7 @@ A card matching game that uses a list of various sight words
 
 The game is built using HTML5, PHP, CSS3, [jQuery 2.1.1](http://code.jquery.com/jquery-2.1.1.js "jQuery 2.1.1") and regular old JavaScript.
 
+The game can be played at [http://games.rf3studios.com/kids/sight-word-match/](http://games.rf3studios.com/kids/sight-word-match/)
 
 ## Instructions
 
