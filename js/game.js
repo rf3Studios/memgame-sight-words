@@ -15,12 +15,6 @@ var HEADER_MATCH_SUCCESS = "YAY!!! YOU FOUND A MATCH!!!";
 var HEADER_MATCH_FAIL = "NO MATCH!";
 var HEADER_GAME_COMPLETE = "YOU MATCHED ALL THE CARDS!!!";
 
-// Audio Constants
-var AUDIO_WELCOME = "dialog_welcome";
-var AUDIO_MATCH_SUCCESS = "dialog_match_success";
-var AUDIO_MATCH_FAIL = "dialog_match_fail";
-var AUDIO_GAME_COMPLETE = "dialog_game_complete";
-
 // Object that will hold the card ID and the card value
 var flippedCard = {cardOneId: "", cardTwoId: "", cardOneVal: "", cardTwoVal: ""};
 
@@ -35,13 +29,22 @@ var score = 0;
 
 // Sight Words
 var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be", "big", "black", "blue", "brown",
-    "but", "came", "can", "come", "did", "do", "down", "eat", "eight", "find", "five", "for", "four", "get", "go",
-    "good", "green", "has", "have", "he", "her", "here", "hers", "his", "him", "hum", "in", "into", "I", "is", "it",
-    "like", "look", "little", "make", "me", "my", "must", "new", "nine", "no", "not", "of", "on", "one", "orange",
-    "our", "out", "play", "pretty", "please", "purple", "ran", "red", "run", "said", "say", "saw", "see", "seven",
-    "she", "six", "small", "so", "soon", "ten", "that", "the", "them", "they", "there", "this", "three", "to",
-    "too", "two", "up", "was", "we", "white", "why", "what", "who", "with", "year", "yes", "your", "yellow", "you",
-    "yours", "zoo"];
+                  "but", "came", "can", "come", "did", "do", "down", "eat", "eight", "find", "five", "for", "four",
+                  "get", "go", "good", "green", "has", "have", "he", "her", "here", "hers", "his", "him", "hum", "in",
+                  "into", "I", "is", "it", "like", "look", "little", "make", "me", "my", "must", "new", "nine", "no",
+                  "not", "of", "on", "one", "orange", "our", "out", "play", "pretty", "please", "purple", "ran", "red",
+                  "run", "said", "say", "saw", "see", "seven", "she", "six", "small", "so", "soon", "ten", "that",
+                  "the", "them", "they", "there", "this", "three", "to", "too", "two", "up", "was", "we", "white",
+                  "why", "what", "who", "with", "year", "yes", "your", "yellow", "you", "yours", "zoo"];
+
+// Audio Object
+var audioSamples = {
+    welcome: ["dialog_welcome"],
+    matchSuccess: ["dialog_good_job", "dialog_thats_a_match"],
+    matchFail: ["dialog_those_dont_match", "dialog_uhoh_those_dont_match"],
+    gameComplete: ["dialog_game_complete"],
+    keepLooking: ["dialog_keep_looking", "dialog_can_you_find_another_match"]
+};
 
 /**
  * Function that initializes and starts the game
@@ -73,7 +76,7 @@ function startGame() {
     console.log(sightWordsToUse);
 
     // Play the welcome sound
-    $(playSound(AUDIO_WELCOME)).on('ended', function () {
+    $(playSound(audioSamples.welcome[0])).on('ended', function () {
         // Populate the cards with the generated sight words
         populateCardsWithWords(sightWordsToUse);
 
@@ -156,11 +159,11 @@ function detectCardClick() {
                     // Add the cards to the matched cards array
                     matchedCards.push(flippedCard.cardOneId, flippedCard.cardTwoId);
 
-                    $(playSound(AUDIO_MATCH_SUCCESS)).on('ended', function () {
+                    $(playSound(pickDialogAudio(audioSamples.matchSuccess))).on('ended', function () {
                         // Check to see if there are any more cards to match. If there are not, the player wins!
                         if (matchedCards.length === NUMBER_OF_CARDS) {
                             $(".header").text(HEADER_GAME_COMPLETE);
-                            $(playSound(AUDIO_GAME_COMPLETE)).on("ended", function () {
+                            $(playSound(audioSamples.gameComplete[0])).on("ended", function () {
                                 startGame();
                             });
                         } else {
@@ -172,7 +175,7 @@ function detectCardClick() {
                 } else {
                     $(".header").text(HEADER_MATCH_FAIL);
 
-                    $(playSound(AUDIO_MATCH_FAIL)).on('ended', function () {
+                    $(playSound(pickDialogAudio(audioSamples.matchFail))).on('ended', function () {
                         // Remove the lock from both cards
                         unlockCard(flippedCard.cardOneId);
                         unlockCard(flippedCard.cardTwoId);
@@ -201,12 +204,11 @@ function detectCardClick() {
 function generateSightWords() {
     var sightWordsArr = [];
     var numberOfWords = 8;
-    var sightWordsArrayLen = sightWords.length - 1;
     var indexArr = [];
 
     // Generate 8 numbers with the lowest being 0 and the highest being the main sight words array length
     while (indexArr.length < numberOfWords) {
-        var rndIndex = Math.floor((Math.random() * sightWordsArrayLen));
+        var rndIndex = Math.floor((Math.random() * (sightWords.length - 1)));
 
         // Each number need to be unique
         if ($.inArray(rndIndex, indexArr) <= -1) {
@@ -214,14 +216,10 @@ function generateSightWords() {
         }
     }
 
+    // Push the value into the array
     $.each(indexArr, function (index, value) {
-        //sightWordsArr.push(sightWords[value]);
+        sightWordsArr.push(sightWords[value]);
     });
-
-    // DEBUG
-    for (var i = 16;i < 24; i++) {
-        sightWordsArr.push(sightWords[i]);
-    }
 
     return sightWordsArr;
 }
@@ -235,12 +233,16 @@ function populateCardsWithWords(wordsArray) {
     var a1 = wordsArray.concat(wordsArray);
     var a2 = shuffleArray(a1);
 
-    for (var i = 1; i <= NUMBER_OF_CARDS; i++) {
-        $("#card-" + i).find(".card-text").text(a2[i - 1]);
-    }
-
-    // DEBUG
+    // DEBUG: Log the total array
     console.log(a2);
+
+    for (var i = 1; i <= NUMBER_OF_CARDS; i++) {
+
+        $("#card-" + i).find(".card-text").text(a2[i - 1]);
+
+        // DEBUG: show which entry is in each card
+        console.log("card-" + i + " :: " + a2[i - 1]);
+    }
 }
 
 /**
@@ -274,6 +276,23 @@ function playSound(audioName) {
     audioElement.setAttribute('autoplay', 'autoplay');
 
     return audioElement;
+}
+
+/**
+ * Picks a random audio sample from an array of audio samples that are passed into the function
+ * and returns the name of the audio sample
+ *
+ * @param {Array} audioSamples Array of the audio sample names
+ * @returns {string} Name of the selected audio sample
+ */
+function pickDialogAudio(audioSamples) {
+    console.log("audio samples len: " + audioSamples.length);
+
+    var rndIndex = Math.floor((Math.random() * (audioSamples.length)));
+
+    console.log("Sample: " + audioSamples[rndIndex]);
+
+    return audioSamples[rndIndex];
 }
 
 /**
