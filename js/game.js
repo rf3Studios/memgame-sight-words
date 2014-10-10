@@ -43,7 +43,8 @@ var audioSamples = {
     matchSuccess: ["dialog_good_job", "dialog_thats_a_match", "dialog_youre_awesome",
                    "dialog_wow_youre_really_good_at_this", "dialog_you_are_the_match_master", "dialog_match_tastic",
                    "dialog_you_have_some_awesome_matching_skills", "dialog_keep_it_up_youre_doing_great"],
-    matchFail: ["dialog_those_dont_match", "dialog_uhoh_those_dont_match"],
+    matchFail: ["dialog_those_dont_match", "dialog_uhoh_those_dont_match", "dialog_keep_looking_i_know_you_can_do_it",
+                "dialog_try_again", "dialog_thats_not_a_match"],
     gameComplete: ["dialog_game_complete"],
     keepLooking: ["dialog_keep_looking", "dialog_can_you_find_another_match"]
 };
