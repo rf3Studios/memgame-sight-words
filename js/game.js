@@ -40,7 +40,9 @@ var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be"
 // Audio Object
 var audioSamples = {
     welcome: ["dialog_welcome"],
-    matchSuccess: ["dialog_good_job", "dialog_thats_a_match"],
+    matchSuccess: ["dialog_good_job", "dialog_thats_a_match", "dialog_youre_awesome",
+                   "dialog_wow_youre_really_good_at_this", "dialog_you_are_the_match_master", "dialog_match_tastic",
+                   "dialog_you_have_some_awesome_matching_skills", "dialog_keep_it_up_youre_doing_great"],
     matchFail: ["dialog_those_dont_match", "dialog_uhoh_those_dont_match"],
     gameComplete: ["dialog_game_complete"],
     keepLooking: ["dialog_keep_looking", "dialog_can_you_find_another_match"]
