@@ -39,9 +39,9 @@ var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be"
     "good", "green", "has", "have", "he", "her", "here", "hers", "his", "him", "hum", "in", "into", "I", "is", "it",
     "like", "look", "little", "make", "me", "my", "must", "new", "nine", "no", "not", "of", "on", "one", "orange",
     "our", "out", "play", "pretty", "please", "purple", "ran", "red", "run", "said", "say", "saw", "see", "seven",
-    "she", "six", "small", "so", "soon", "ten", "that", "the", "they", "them", "there", "this", "that", "three",
-    "to", "too", "two", "up", "was", "we", "white", "why", "what", "who", "with", "year", "yes", "your", "yellow",
-    "you", "yours"];
+    "she", "six", "small", "so", "soon", "ten", "that", "the", "them", "they", "there", "this", "three", "to",
+    "too", "two", "up", "was", "we", "white", "why", "what", "who", "with", "year", "yes", "your", "yellow", "you",
+    "yours", "zoo"];
 
 /**
  * Function that initializes and starts the game
@@ -65,6 +65,8 @@ function startGame() {
             matchedCards.pop();
         }
     }
+
+    console.log("Number of sight words: " + sightWords.length);
 
     // Get eight words from the sight words array...
     var sightWordsToUse = generateSightWords();
@@ -258,15 +260,6 @@ function shuffleArray(arrayToShuffle) {
  * @returns {HTMLElement} Returns the audio element
  */
 function playSound(audioName) {
-
-    var completedAudioSamples = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be", "big", "black",
-        "blue", "brown", "but", "came", "can", "come", "did", "do", "down", "eat", "eight", "dialog_welcome",
-        "dialog_find_a_match", "dialog_match_success", "dialog_match_fail", "dialog_game_complete"];
-
-    if (completedAudioSamples.indexOf(audioName) === -1) {
-        audioName = "null";
-    }
-
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'audio/' + audioName + '.mp3');
     audioElement.setAttribute('autoplay', 'autoplay');
