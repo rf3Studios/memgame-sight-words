@@ -70,6 +70,7 @@ function startGame() {
 
     // Get eight words from the sight words array...
     var sightWordsToUse = generateSightWords();
+    console.log(sightWordsToUse);
 
     // Play the welcome sound
     $(playSound(AUDIO_WELCOME)).on('ended', function () {
@@ -214,8 +215,13 @@ function generateSightWords() {
     }
 
     $.each(indexArr, function (index, value) {
-        sightWordsArr.push(sightWords[value]);
+        //sightWordsArr.push(sightWords[value]);
     });
+
+    // DEBUG
+    for (var i = 16;i < 24; i++) {
+        sightWordsArr.push(sightWords[i]);
+    }
 
     return sightWordsArr;
 }
@@ -232,6 +238,9 @@ function populateCardsWithWords(wordsArray) {
     for (var i = 1; i <= NUMBER_OF_CARDS; i++) {
         $("#card-" + i).find(".card-text").text(a2[i - 1]);
     }
+
+    // DEBUG
+    console.log(a2);
 }
 
 /**
