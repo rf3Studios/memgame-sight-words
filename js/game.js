@@ -39,7 +39,7 @@ var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be"
 
 // Audio Object
 var audioSamples = {
-    welcome: ["dialog_welcome"],
+    welcome: ["dialog_welcome", "dialog_begin_by_selecting_a_card", "dialog_find_a_match", "dialog_lets_play_again"],
     matchSuccess: ["dialog_good_job", "dialog_thats_a_match", "dialog_youre_awesome",
                    "dialog_wow_youre_really_good_at_this", "dialog_you_are_the_match_master", "dialog_match_tastic",
                    "dialog_you_have_some_awesome_matching_skills", "dialog_keep_it_up_youre_doing_great"],
@@ -52,7 +52,7 @@ var audioSamples = {
 /**
  * Function that initializes and starts the game
  */
-function startGame() {
+function startGame(flag_restart_game) {
     if ($(".flip-container").hasClass("flipped")) {
         // We are restarting the game. Clear the flipped and locked classes so that the cards flip back
         // over and are unlocked, that way the user can click them.
@@ -79,13 +79,24 @@ function startGame() {
     console.log(sightWordsToUse);
 
     // Play the welcome sound
-    $(playSound(audioSamples.welcome[0])).on('ended', function () {
-        // Populate the cards with the generated sight words
-        populateCardsWithWords(sightWordsToUse);
+    if (flag_restart_game === 1) {
+        $(playSound(audioSamples.welcome[2])).on("ended", function () {
+            // Populate the cards with the generated sight words
+            populateCardsWithWords(sightWordsToUse);
 
-        // Allow the user to click the cards
-        detectCardClick()
-    });
+            detectCardClick()
+        });
+    } else {
+        $(playSound(audioSamples.welcome[0])).on("ended", function () {
+            // Populate the cards with the generated sight words
+            populateCardsWithWords(sightWordsToUse);
+
+            // Allow the user to click the cards
+            $(playSound(audioSamples.welcome[1])).on("ended", function () {
+                detectCardClick()
+            });
+        });
+    }
 }
 
 /**
@@ -167,7 +178,9 @@ function detectCardClick() {
                         if (matchedCards.length === NUMBER_OF_CARDS) {
                             $(".header").text(HEADER_GAME_COMPLETE);
                             $(playSound(audioSamples.gameComplete[0])).on("ended", function () {
-                                startGame();
+                                $(playSound(audioSamples.welcome[3])).on("ended", function() {
+                                    startGame(1);
+                                });
                             });
                         } else {
                             $(".header").text(HEADER_TITLE);
