@@ -12,7 +12,7 @@ const GRID_ROWS = 4;
 // The number of columns in our grid
 const GRID_COLS = 4;
 // Version
-const VERSION_CODE = "0.0.1";
+const VERSION_CODE = "0.0.2";
 ?>
 <!DOCTYPE html>
 <html>
