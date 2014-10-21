@@ -113,8 +113,10 @@
     transform         : rotateY(180deg);
 }
 
-.header {
+#header {
+    font-family      : Arial, Helvetica, sans-serif;
     font-size        : 2em;
+    font-weight      : bold;
     text-align       : center;
     background-color : aqua;
     margin-bottom    : 20px;
@@ -124,4 +126,22 @@
     font-family : Arial, Verdana, sans-serif;
     font-size   : 1.5em;
     font-weight : bold;
+}
+
+#score-container {
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 1.5em;
+}
+
+#score-current {
+    float  : left;
+    margin : 0 0 0 110px;
+}
+
+#score-best {
+    float  : right;
+    margin : 0 110px 0 0;
+}
+
+.score-nums {
 }

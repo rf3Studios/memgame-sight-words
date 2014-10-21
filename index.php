@@ -19,6 +19,7 @@ const VERSION_CODE = "0.0.3";
 <head>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="application/javascript"></script>
+    <script src="js/jquery.cookie.js" type="application/javascript"></script>
     <script src="js/game.js" type="application/javascript"></script>
 
     <title>rf3studios Sight Word Match Game</title>
@@ -28,45 +29,50 @@ const VERSION_CODE = "0.0.3";
     <meta name="author" content="Rich Friedel">
 </head>
 <body>
-<div id="container">
-<div class="header">Match The Sight Words</div>
-<?php
-// The number of total cards we'll need for the grid
-$numberOfCards = GRID_ROWS * GRID_COLS;
+    <div id="container">
+        <div id="header">Match The Sight Words</div>
+        <div id="score-container">
+            <p id="score-current">Current Attempts: <span class="score-nums">0</span></p>
 
-// Temp card count
-$tempCardNum = 1;
+            <p id="score-best">Your Best: <span class="score-nums">0</span></p>
+        </div>
+        <?php
+        // The number of total cards we'll need for the grid
+        $numberOfCards = GRID_ROWS * GRID_COLS;
 
-// Generate rows
-for ($i = 0; $i < (GRID_ROWS); $i++) {
-    echo "<div class=\"row-wrapper\">\r\n";
+        // Temp card count
+        $tempCardNum = 1;
 
-    // Generate cards
-    for ($j = 0; $j < GRID_COLS; $j++) {
-        echo "    <div id=\"card-" . $tempCardNum . "\" class=\"flip-container\" ontouchstart=\"this.classList.toggle('hover');\">\r\n";
-        echo "        <div class=\"flipper\">\r\n";
-        echo "            <div class=\"front\">\r\n";
-        echo "                <!-- front content -->\r\n";
-        echo "            </div>\r\n";
-        echo "            <div class=\"back\">\r\n";
-        echo "                <!-- back content -->\r\n";
-        echo "                <span class=\"card-text\"></span>\r\n";
-        echo "            </div>\r\n";
-        echo "        </div>\r\n";
-        echo "    </div>\r\n";
+        // Generate rows
+        for ($i = 0; $i < (GRID_ROWS); $i++) {
+            echo "<div class=\"row-wrapper\">\r\n";
 
-        // Increment card count
-        $tempCardNum++;
-    }
+            // Generate cards
+            for ($j = 0; $j < GRID_COLS; $j++) {
+                echo "    <div id=\"card-" . $tempCardNum . "\" class=\"flip-container\" ontouchstart=\"this.classList.toggle('hover');\">\r\n";
+                echo "        <div class=\"flipper\">\r\n";
+                echo "            <div class=\"front\">\r\n";
+                echo "                <!-- front content -->\r\n";
+                echo "            </div>\r\n";
+                echo "            <div class=\"back\">\r\n";
+                echo "                <!-- back content -->\r\n";
+                echo "                <span class=\"card-text\"></span>\r\n";
+                echo "            </div>\r\n";
+                echo "        </div>\r\n";
+                echo "    </div>\r\n";
 
-    echo "</div>\r\n";
-}
-?>
-</div>
-<script>
-    $(document).ready(function () {
-        startGame();
-    });
-</script>
+                // Increment card count
+                $tempCardNum++;
+            }
+
+            echo "</div>\r\n";
+        }
+        ?>
+    </div>
+    <script>
+        $(document).ready(function () {
+            startGame();
+        });
+    </script>
 </body>
 </html>

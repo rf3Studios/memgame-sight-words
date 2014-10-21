@@ -24,9 +24,6 @@ var matchedCards = [];
 // Flip counter
 var flips = 0;
 
-// Player score
-var score = 0;
-
 // Sight Words
 var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be", "big", "black", "blue", "brown",
                   "but", "came", "can", "come", "did", "do", "down", "eat", "eight", "find", "five", "for", "four",
@@ -49,10 +46,17 @@ var audioSamples = {
     keepLooking: ["dialog_keep_looking", "dialog_can_you_find_another_match"]
 };
 
+// Create a new Score object
+var theScore = new Score(0);
+
 /**
  * Function that initializes and starts the game
  */
 function startGame(flag_restart_game) {
+    theScore.resetCurrentScore();
+    theScore.displayCurrentScore();
+    theScore.displayHighScore();
+
     if ($(".flip-container").hasClass("flipped")) {
         // We are restarting the game. Clear the flipped and locked classes so that the cards flip back
         // over and are unlocked, that way the user can click them.
@@ -60,9 +64,6 @@ function startGame(flag_restart_game) {
 
         // Reset the flips counter
         flips = 0;
-
-        // Reset the score counter
-        score = 0;
 
         // Clear the matched cards array
         // Per this thread on StackOverflow: http://stackoverflow.com/a/1232046/520186
@@ -141,6 +142,11 @@ function detectCardClick() {
             });
 
         } else if (flips === 2) { // Second flip
+            // Increment current score
+            theScore.incrementCurrentScore();
+            // Display the new score
+            theScore.displayCurrentScore();
+
             // Get card ID
             flippedCard.cardTwoId = $(this).attr('id');
             // Get card value
@@ -178,7 +184,13 @@ function detectCardClick() {
                         if (matchedCards.length === NUMBER_OF_CARDS) {
                             $(".header").text(HEADER_GAME_COMPLETE);
                             $(playSound(audioSamples.gameComplete[0])).on("ended", function () {
-                                $(playSound(audioSamples.welcome[3])).on("ended", function() {
+                                $(playSound(audioSamples.welcome[3])).on("ended", function () {
+                                    // Set the high score
+                                    theScore.setHighScore(theScore.getCurrentScore());
+                                    // Display the high score
+                                    theScore.displayHighScore();
+
+                                    // Start a new game
                                     startGame(1);
                                 });
                             });
@@ -371,3 +383,88 @@ function unlockCard(cardId) {
 function isCardLocked(cardId) {
     return $("#" + cardId).hasClass("locked");
 }
+
+/**
+ * The Score object
+ *
+ * @param score
+ * @constructor
+ */
+function Score(score) {
+    this.score = score;
+}
+
+/**
+ * Resets the current score to 0
+ */
+Score.prototype.resetCurrentScore = function () {
+    this.setCurrentScore(0);
+};
+
+/**
+ * Resets the high score to 0
+ */
+Score.prototype.resetHighScore = function () {
+    this.setHighScore(0);
+};
+
+/**
+ * Gets the current score and returns it
+ *
+ * @returns {*}
+ */
+Score.prototype.getCurrentScore = function () {
+    return this.score;
+};
+
+/**
+ * Sets the current score to whatever is passed to it
+ *
+ * @param score The current score
+ */
+Score.prototype.setCurrentScore = function (score) {
+    this.score = score;
+};
+
+/**
+ * Displays the current score in the UI
+ */
+Score.prototype.displayCurrentScore = function () {
+    $("#score-current").find(".score-nums").text(this.score);
+};
+
+/**
+ * Gets the high score from the user cookie and if the cookie doesn't exist, it creates it
+ *
+ * @returns {*} The high score stored in the user's cookies
+ */
+Score.prototype.getHighScore = function () {
+    if (typeof $.cookie("high_score") === 'undefined') {
+        this.setHighScore(0);
+    }
+
+    return $.cookie("high_score");
+};
+
+/**
+ * Sets the high score in the user's cookies
+ *
+ * @param score The high score to set
+ */
+Score.prototype.setHighScore = function (score) {
+    $.cookie("high_score", score, {expires: 365});
+};
+
+/**
+ * Displays the user's high score in the UI
+ */
+Score.prototype.displayHighScore = function () {
+    $("#score-best").find(".score-nums").text(this.getHighScore());
+};
+
+/**
+ * Increments the current score by 1 and sets it as the current score
+ */
+Score.prototype.incrementCurrentScore = function () {
+    this.setCurrentScore(++this.score);
+};

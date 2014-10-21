@@ -1,4 +1,4 @@
-memgame-sight-words v0.0.3
+memgame-sight-words v0.0.4
 ===================
 
 A card matching game that uses a list of various sight words
@@ -14,6 +14,7 @@ Coming Soon!
 ## Resources
 
 * [jQuery 2.1.1](http://code.jquery.com/jquery-2.1.1.js "jQuery 2.1.1")
+* jQuery Cookie - [https://github.com/carhartl/jquery-cookie](https://github.com/carhartl/jquery-cookie)
 * Head of elephant icon made by [Freepik](http://www.freepik.com) from [www.flaticon.com](http://www.flaticon.com) is licensed under [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
     * Modified by [Rich Friedel](http://rf3studios.com)
 * Audio files were recorded and edited using [Audacity](http://audacity.sourceforge.net/ "Audacity")
