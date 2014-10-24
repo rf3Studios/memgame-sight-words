@@ -12,11 +12,12 @@ const GRID_ROWS = 4;
 // The number of columns in our grid
 const GRID_COLS = 4;
 // Version
-const VERSION_CODE = "0.0.4";
+const VERSION_CODE = "0.0.5";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="css/style_reset.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="application/javascript"></script>
     <script src="js/jquery.cookie.js" type="application/javascript"></script>
@@ -69,6 +70,20 @@ const VERSION_CODE = "0.0.4";
         }
         ?>
     </div>
+    <div id="footer">
+        <p><strong>Sight Words Memory Game</strong> &copy;2014 <a href="http://rf3studios.com" target="_blank"
+                                                                       title="rf3Studios.com">rf3Studios.com</a> under
+            <a href="LICENSE" target="_blank" title="MIT License">MIT License</a> using
+            <a href="http://jquery.com/" target="_blank" title="Uses jQuery">jQuery</a>
+        </p>
+
+        <p>Source Code Available On <a href="https://github.com/rf3Studios/memgame-sight-words" target="_blank"
+                                       title="GitHub">GitHub</a></p>
+
+        <p><a href="https://github.com/rf3Studios/" target="_blank"
+              title="Version Release on GitHub">v<?php echo VERSION_CODE; ?></a></p>
+    </div>
+
     <script>
         $(document).ready(function () {
             startGame();

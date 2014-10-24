@@ -6,12 +6,69 @@
  * Released under the MIT license
  */
 
+/* Typography */
+html {
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 62.5%;
+    line-height : 62.5%;
+}
+
+body {
+    line-height : 1.6rem;
+    font-size   : 1.6rem;
+}
+
+#header {
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 3rem;
+    font-weight : bold;
+}
+
+.card-text {
+    font-family : Arial, Verdana, sans-serif;
+    font-size   : 2rem;
+    font-weight : bold;
+}
+
+#score-container {
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 2rem;
+}
+
+#footer p {
+    line-height : 1.2rem;
+    font-size   : 1.2rem;
+}
+
+#footer p a {
+    text-decoration : none;
+    font-weight     : bold;
+    color           : #6596ef;
+}
+
+#footer p a:hover {
+    color            : #2f4f4f;
+    background-color : #c5dae4;
+}
+
+/* Layout */
+
 #container {
     width            : 840px;
     text-align       : center;
-    margin           : 0 auto;
+    margin           : 10px auto 0;
     padding-bottom   : 50px;
-    background-color : blueviolet;
+    background-color : #b25ef3;
+}
+
+#footer {
+    margin-right : 8px;
+    float        : right;
+    text-align   : right;
+}
+
+#footer p {
+    margin-top: 5px;
 }
 
 .row-wrapper {
@@ -87,6 +144,9 @@
     position                    : absolute;
     top                         : 0;
     left                        : 0;
+    border-top-left-radius      : 10px;
+    border-bottom-right-radius  : 10px;
+    border                      : solid #222222 1px;
 }
 
 /* front pane, placed above back */
@@ -100,10 +160,11 @@
 
 /* back, initially hidden pane */
 .back {
-    background-color  : mediumpurple;
+    background-color  : #e6abbc;
     text-align        : center;
     vertical-align    : middle;
     line-height       : 150px; /* the same as your div height */
+    box-shadow        : 0 3px 5px #212121;
 
     /*transform*/
     -webkit-transform : rotateY(180deg);
@@ -114,23 +175,24 @@
 }
 
 #header {
-    font-family      : Arial, Helvetica, sans-serif;
-    font-size        : 2em;
-    font-weight      : bold;
     text-align       : center;
-    background-color : aqua;
+    background-color : #c3fd57;
     margin-bottom    : 20px;
+    height           : 50px;
+    line-height      : 50px;
+    border-top       : solid #212121 1px;
+    box-shadow       : 0 2px 5px #212121;
 }
 
-.card-text {
-    font-family : Arial, Verdana, sans-serif;
-    font-size   : 1.5em;
-    font-weight : bold;
+#container, #header {
+    border-left             : solid #212121 1px;
+    border-right            : solid #212121 1px;
+    border-top-left-radius  : 10px;
+    border-top-right-radius : 10px;
 }
 
-#score-container {
-    font-family : Arial, Helvetica, sans-serif;
-    font-size   : 1.5em;
+#container {
+    border-bottom : solid #212121 1px;
 }
 
 #score-current {
@@ -141,7 +203,4 @@
 #score-best {
     float  : right;
     margin : 0 110px 0 0;
-}
-
-.score-nums {
 }
