@@ -80,7 +80,7 @@ const VERSION_CODE = "0.0.5";
         <p>Source Code Available On <a href="https://github.com/rf3Studios/memgame-sight-words" target="_blank"
                                        title="GitHub">GitHub</a></p>
 
-        <p><a href="https://github.com/rf3Studios/" target="_blank"
+        <p><a href="https://github.com/rf3Studios/memgame-sight-words/releases/tag/v0.0.5" target="_blank"
               title="Version Release on GitHub">v<?php echo VERSION_CODE; ?></a></p>
     </div>
 
