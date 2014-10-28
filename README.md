@@ -1,4 +1,4 @@
-memgame-sight-words v0.0.6
+memgame-sight-words v0.1.0
 ===================
 
 A card matching game that uses a list of various sight words
