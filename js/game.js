@@ -73,11 +73,8 @@ function startGame(flag_restart_game) {
         }
     }
 
-    console.log("Number of sight words: " + sightWords.length);
-
     // Get eight words from the sight words array...
     var sightWordsToUse = generateSightWords();
-    console.log(sightWordsToUse);
 
     // Play the welcome sound
     if (flag_restart_game === 1) {
@@ -142,11 +139,6 @@ function detectCardClick() {
             });
 
         } else if (flips === 2) { // Second flip
-            // Increment current score
-            theScore.incrementCurrentScore();
-            // Display the new score
-            theScore.displayCurrentScore();
-
             // Get card ID
             flippedCard.cardTwoId = $(this).attr('id');
             // Get card value
@@ -162,12 +154,16 @@ function detectCardClick() {
 
             // Lock the card
             lockCard(flippedCard.cardTwoId);
-
             // Set the processing lock while audio is playing
             addProcessingLock();
 
             // Turn the second card
             flipCard("#" + flippedCard.cardTwoId);
+
+            // Increment current score
+            theScore.incrementCurrentScore();
+            // Display the new score
+            theScore.displayCurrentScore();
 
             // Play the card value audio
             $(playSound(flippedCard.cardTwoVal)).on('ended', function () {
@@ -184,12 +180,15 @@ function detectCardClick() {
                         if (matchedCards.length === NUMBER_OF_CARDS) {
                             $(".header").text(HEADER_GAME_COMPLETE);
                             $(playSound(audioSamples.gameComplete[0])).on("ended", function () {
-                                $(playSound(audioSamples.welcome[3])).on("ended", function () {
+                                // Check to see if the current score is less than the stored best score
+                                if (theScore.getHighScore() === 0 || theScore.getHighScore() > theScore.getCurrentScore()) {
                                     // Set the high score
                                     theScore.setHighScore(theScore.getCurrentScore());
                                     // Display the high score
                                     theScore.displayHighScore();
+                                }
 
+                                $(playSound(audioSamples.welcome[3])).on("ended", function () {
                                     // Start a new game
                                     startGame(1);
                                 });
@@ -314,11 +313,7 @@ function playSound(audioName) {
  * @returns {string} Name of the selected audio sample
  */
 function pickDialogAudio(audioSamples) {
-    console.log("audio samples len: " + audioSamples.length);
-
     var rndIndex = Math.floor((Math.random() * (audioSamples.length)));
-
-    console.log("Sample: " + audioSamples[rndIndex]);
 
     return audioSamples[rndIndex];
 }
@@ -409,12 +404,12 @@ Score.prototype.resetHighScore = function () {
 };
 
 /**
- * Gets the current score and returns it
+ * Gets the current score and returns it as a Number
  *
- * @returns {*}
+ * @returns {number} The current score
  */
 Score.prototype.getCurrentScore = function () {
-    return this.score;
+    return Number(this.score);
 };
 
 /**
@@ -436,14 +431,14 @@ Score.prototype.displayCurrentScore = function () {
 /**
  * Gets the high score from the user cookie and if the cookie doesn't exist, it creates it
  *
- * @returns {*} The high score stored in the user's cookies
+ * @returns {number} The high score stored in the user's cookies as a Number
  */
 Score.prototype.getHighScore = function () {
     if (typeof $.cookie("high_score") === 'undefined') {
         this.setHighScore(0);
     }
 
-    return $.cookie("high_score");
+    return Number($.cookie("high_score"));
 };
 
 /**

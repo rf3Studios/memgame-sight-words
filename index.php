@@ -12,7 +12,7 @@ const GRID_ROWS = 4;
 // The number of columns in our grid
 const GRID_COLS = 4;
 // Version
-const VERSION_CODE = "0.0.5";
+const VERSION_CODE = "0.0.6";
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,7 +80,7 @@ const VERSION_CODE = "0.0.5";
         <p>Source Code Available On <a href="https://github.com/rf3Studios/memgame-sight-words" target="_blank"
                                        title="GitHub">GitHub</a></p>
 
-        <p><a href="https://github.com/rf3Studios/memgame-sight-words/releases/tag/v0.0.5" target="_blank"
+        <p><a href="https://github.com/rf3Studios/memgame-sight-words/releases/tag/v<?php echo VERSION_CODE; ?>" target="_blank"
               title="Version Release on GitHub">v<?php echo VERSION_CODE; ?></a></p>
     </div>
 
