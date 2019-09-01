@@ -7,25 +7,25 @@
  */
 
 // General Constants
-var NUMBER_OF_CARDS = 16;
+const NUMBER_OF_CARDS = 16;
 
 // String Constants
-var HEADER_TITLE = "Match The Sight Words";
-var HEADER_MATCH_SUCCESS = "YAY!!! YOU FOUND A MATCH!!!";
-var HEADER_MATCH_FAIL = "NO MATCH!";
-var HEADER_GAME_COMPLETE = "YOU MATCHED ALL THE CARDS!!!";
+const HEADER_TITLE = "Match The Sight Words";
+const HEADER_MATCH_SUCCESS = "YAY!!! YOU FOUND A MATCH!!!";
+const HEADER_MATCH_FAIL = "NO MATCH!";
+const HEADER_GAME_COMPLETE = "YOU MATCHED ALL THE CARDS!!!";
 
 // Object that will hold the card ID and the card value
-var flippedCard = {cardOneId: "", cardTwoId: "", cardOneVal: "", cardTwoVal: ""};
+const flippedCard = {cardOneId: "", cardTwoId: "", cardOneVal: "", cardTwoVal: ""};
 
 // Array of cards that have been matched throughout the game
-var matchedCards = [];
+const matchedCards = [];
 
 // Flip counter
-var flips = 0;
+let flips = 0;
 
 // Sight Words
-var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be", "big", "black", "blue", "brown",
+const sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be", "big", "black", "blue", "brown",
                   "but", "came", "can", "come", "did", "do", "down", "eat", "eight", "find", "five", "for", "four",
                   "get", "go", "good", "green", "has", "have", "he", "her", "here", "hers", "his", "him", "hum", "in",
                   "into", "I", "is", "it", "like", "look", "little", "make", "me", "my", "must", "new", "nine", "no",
@@ -35,7 +35,7 @@ var sightWords = ["a", "an", "and", "am", "are", "as", "at", "ate", "away", "be"
                   "why", "what", "who", "with", "year", "yes", "your", "yellow", "you", "yours", "zoo"];
 
 // Audio Object
-var audioSamples = {
+const audioSamples = {
     welcome: ["dialog_welcome", "dialog_begin_by_selecting_a_card", "dialog_find_a_match", "dialog_lets_play_again"],
     matchSuccess: ["dialog_good_job", "dialog_thats_a_match", "dialog_youre_awesome",
                    "dialog_wow_youre_really_good_at_this", "dialog_you_are_the_match_master", "dialog_match_tastic",
@@ -47,7 +47,7 @@ var audioSamples = {
 };
 
 // Create a new Score object
-var theScore = new Score(0);
+const theScore = new Score(0);
 
 /**
  * Function that initializes and starts the game
@@ -74,7 +74,7 @@ function startGame(flag_restart_game) {
     }
 
     // Get eight words from the sight words array...
-    var sightWordsToUse = generateSightWords();
+    let sightWordsToUse = generateSightWords();
 
     // Play the welcome sound
     if (flag_restart_game === 1) {
@@ -229,13 +229,13 @@ function detectCardClick() {
  * @returns {Array} Returns an Array of sight words
  */
 function generateSightWords() {
-    var sightWordsArr = [];
-    var numberOfWords = 8;
-    var indexArr = [];
+    const sightWordsArr = [];
+    const numberOfWords = 8;
+    const indexArr = [];
 
     // Generate 8 numbers with the lowest being 0 and the highest being the main sight words array length
     while (indexArr.length < numberOfWords) {
-        var rndIndex = Math.floor((Math.random() * (sightWords.length - 1)));
+        const rndIndex = Math.floor((Math.random() * (sightWords.length - 1)));
 
         // Each number need to be unique
         if ($.inArray(rndIndex, indexArr) <= -1) {
@@ -257,13 +257,13 @@ function generateSightWords() {
  * @param wordsArray {Array} An array of words that will be used to populate the cards with
  */
 function populateCardsWithWords(wordsArray) {
-    var a1 = wordsArray.concat(wordsArray);
-    var a2 = shuffleArray(a1);
+    const a1 = wordsArray.concat(wordsArray);
+    const a2 = shuffleArray(a1);
 
     // DEBUG: Log the total array
     console.log(a2);
 
-    for (var i = 1; i <= NUMBER_OF_CARDS; i++) {
+    for (let i = 1; i <= NUMBER_OF_CARDS; i++) {
 
         $("#card-" + i).find(".card-text").text(a2[i - 1]);
 
@@ -280,9 +280,9 @@ function populateCardsWithWords(wordsArray) {
  * @returns {Array} Returns a randomly shuffled array
  */
 function shuffleArray(arrayToShuffle) {
-    for (var i = arrayToShuffle.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arrayToShuffle[i];
+    for (let i = arrayToShuffle.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arrayToShuffle[i];
         arrayToShuffle[i] = arrayToShuffle[j];
         arrayToShuffle[j] = temp;
     }
@@ -298,7 +298,7 @@ function shuffleArray(arrayToShuffle) {
  * @returns {HTMLElement} Returns the audio element
  */
 function playSound(audioName) {
-    var audioElement = document.createElement('audio');
+    const audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'audio/' + audioName + '.mp3');
     audioElement.setAttribute('autoplay', 'autoplay');
 
@@ -313,7 +313,7 @@ function playSound(audioName) {
  * @returns {string} Name of the selected audio sample
  */
 function pickDialogAudio(audioSamples) {
-    var rndIndex = Math.floor((Math.random() * (audioSamples.length)));
+    const rndIndex = Math.floor((Math.random() * (audioSamples.length)));
 
     return audioSamples[rndIndex];
 }

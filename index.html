@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style_reset.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="application/javascript"></script>
+    <script src="js/jquery.cookie.js" type="application/javascript"></script>
+    <script src="js/game.js" type="application/javascript"></script>
+
+    <title>rf3studios Sight Word Match Game</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Sight Words Match Game For Kindergarten">
+    <meta name="author" content="Rich Friedel">
+</head>
+<body>
+<div id="container">
+    <div id="header">Match The Sight Words</div>
+    <div id="score-container">
+        <p id="score-current">Current Attempts: <span class="score-nums">0</span></p>
+
+        <p id="score-best">Your Best: <span class="score-nums">0</span></p>
+    </div>
+    <script>
+        // TODO: Extract all of this out
+        // THis is only here temporarily as I refactor away from PHP
+
+        // The number of total cards we'll need for the grid
+        const gridRows = 4;
+        const gridCols = 4;
+        let numberOfCards = gridRows * gridCols;
+        let tempCardNum = 1;
+        const container = document.getElementById('container');
+
+        for (let i = 0; i < gridRows; i++) {
+            let row = document.createElement("div");
+            row.className = "row-wrapper";
+            container.appendChild(row);
+
+            for (let i = 0; i < gridCols; i++) {
+                let card = document.createElement("div");
+                card.id = "card-" + tempCardNum;
+                card.className = "flip-container";
+                row.appendChild(card);
+
+                let flipper = document.createElement("div");
+                flipper.className = "flipper";
+                card.appendChild(flipper);
+
+                let front = document.createElement("div");
+                front.className = "front";
+                flipper.appendChild(front);
+
+                let back = document.createElement("div");
+                back.className = "back";
+                let cardText = document.createElement("span");
+                cardText.className = "card-text";
+                back.appendChild(cardText);
+                flipper.appendChild(back);
+
+                tempCardNum++;
+            }
+        }
+
+        // for (let j = 0; j < gridCols; j++) {
+        //     const row_wrapper = container.getElementById('row-wrapper')
+        //     row_wrapper.innerHTML = "<div id=\"card-" + tempCardNum + "\" class=\"flip-container\" ontouchstart=\"this.classList.toggle('hover');\">";
+        //
+        //     const card = row_wrapper.getElementById("card-" + tempCardNum);
+        //     card.innerHTML = "<div class=\"flipper\">";
+        //
+        //     const flipper = card.getElementById("flipper");
+        //     flipper.innerHTML = "<div class=\"front\"";
+        //
+        //     const front = flipper.getElementById("front");
+        //     front.innerHTML = "</div>";
+        //
+        //     flipper.innerHTML = "<div class=\"back\"";
+        //     const back = flipper.getElementById("back");
+        //     back.innerHTML = "<span class=\"card-text\"></span>";
+        //     back.innerHTML = "</div>";
+        //
+        //     flipper.innerHTML = "</div>";
+        //     card.innerHTML = "</div>";
+        //     row_wrapper.innerHTML = "</div>";
+        //
+        //     tempCardNum++;
+        // }
+    </script>
+</div>
+<div id="footer">
+    <p><strong>Sight Words Memory Game</strong> &copy;2014 <a href="http://rf3studios.com" target="_blank"
+                                                              title="rf3Studios.com">rf3Studios.com</a> under
+        <a href="LICENSE" target="_blank" title="MIT License">MIT License</a> using
+        <a href="https://jquery.com/" target="_blank" title="Uses jQuery">jQuery</a>
+    </p>
+
+    <p>Source Code Available On <a href="https://github.com/rf43/memgame-sight-words" target="_blank"
+                                   title="GitHub">GitHub</a></p>
+
+    <p><a href="https://github.com/rf43/memgame-sight-words"
+          target="_blank"
+          title="Version Release on GitHub">v0.2.0</a></p>
+</div>
+
+<script>
+    $(document).ready(function () {
+        startGame();
+    });
+</script>
+</body>
+</html>
